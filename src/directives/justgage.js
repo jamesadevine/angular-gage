@@ -1,4 +1,3 @@
-/* global JustGage:false */
 'use strict';
 
 angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
@@ -7,6 +6,7 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
       return {
         restrict: 'EAC',
         scope: {
+          id:'@',
           title: '@',                       // gauge title text
           titleFontColor: '@',              // title text color
 
@@ -104,9 +104,12 @@ angular.module('frapontillo.gage.directives', ['frapontillo.gage.controllers'])
            * It also binds the scope values to appropriate changes
            */
           var init = function() {
+            element[0].id = justgageCtrl.getDefinedOptions().id;
+            console.log(justgageCtrl.getDefinedOptions());
             var justgageOptions = {
               parentNode: element[0]
             };
+
             angular.extend(justgageOptions, justgageCtrl.getDefinedOptions());
 
             // Remove existing canvas from DOM (if any)
